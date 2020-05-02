@@ -1,26 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.less'
 
-function App() {
+import './style/index.less';
+
+import Button from './components/button/Button';
+
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="App">
+        <div className="button-box">
+            <Button type="default" autoFocus={true}>default</Button>
+            <Button type="primary">primary</Button>
+            <Button type="danger">danger</Button>
+            <Button type="link">link</Button>
+            <Button size="large">large</Button>
+            <Button size="middle" disabled={true}>default</Button>
+            <Button size="small">small</Button>
+            <Button size="small" target="_blank" href="https://juejin.im/timeline">掘金</Button>
+        </div>
+      </div>
   );
-}
+};
 
 export default App;

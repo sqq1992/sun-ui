@@ -1,0 +1,70 @@
+
+.btn {
+  position: relative;
+  display: inline-block;
+  white-space: normal;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  outline: 0 none;
+  font-weight: @btn-font-weight;
+  box-shadow: @btn-box-shadow;
+  line-height: @line-height-base;
+  border: @btn-border-width solid transparent;
+  .button-size(@btn-padding-y, @btn-padding-x, @font-size-base, @border-radius);
+
+
+  &.disabled,
+  &[disabled]{
+    cursor: not-allowed;
+    opacity: @btn-disabled-opacity;
+    box-shadow: none;
+    >* {
+      pointer-events: none; //todo 禁止事件
+    }
+  }
+
+}
+
+.btn-small{
+  .button-size(@btn-padding-y-sm, @btn-padding-x-sm, @font-size-sm, @border-radius);
+}
+
+.btn-large{
+  .button-size(@btn-padding-y-lg, @btn-padding-x-lg, @font-size-lg, @border-radius);
+}
+
+.btn-primary {
+  .button-style(@primary, @primary, @white);
+}
+.btn-danger {
+  .button-style(@danger, @danger, @white);
+}
+.btn-default{
+  .button-style(@white, @gray-400, @body-color, @white, @primary, @primary)
+}
+
+.btn-link{
+  font-weight: @font-weight-normal;
+  color: @btn-link-color;
+  text-decoration: @link-decoration;
+  box-shadow: none;
+
+  &:hover{
+    color: @btn-link-hover-color;
+    text-decoration: @link-hover-decoration;
+  }
+
+  &:focus,
+  &.focus{
+    color: @btn-link-disabled-color;
+    box-shadow: none;
+  }
+
+  &:disabled,
+  &.disabled{
+    color: @btn-link-disabled-color;
+    pointer-events: none;
+  }
+
+}
