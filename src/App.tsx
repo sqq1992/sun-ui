@@ -6,6 +6,7 @@ import Button from './components/button/Button';
 import Menu from './components/menu/Menu';
 import MenuItem from "./components/menu/MenuItem";
 import SubMenu from "./components/menu/SubMenu";
+import Icon from "./components/icon/Icon";
 
 const App: React.FC = () => {
   return (
@@ -60,6 +61,9 @@ const App: React.FC = () => {
                 </SubMenu>
             </Menu>
         </div>
+          <div>
+              <Icon icon='coffee' />
+          </div>
       </div>
   );
 };
