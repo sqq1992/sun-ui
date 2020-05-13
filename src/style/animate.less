@@ -1,0 +1,14 @@
+
+.zoom-in-top-enter {
+  .zoom-init-state(0, scaleY(0));
+}
+.zoom-in-top-enter-active {
+  .zoom-run-state(1, scaleY(1), center top);
+}
+
+.zoom-in-top-enter-done{
+  .zoom-init-state(1, scaleY(1));
+}
+.zoom-in-top-exit-active{
+  .zoom-run-state(0, scaleY(0), center top);
+}

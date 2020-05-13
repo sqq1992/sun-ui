@@ -2,7 +2,6 @@ import React, {createContext, useState} from 'react';
 import Classnames from 'classnames';
 import {MenuItemProps} from "./MenuItem";
 
-
 type modeText = 'horizontal' | 'vertical';
 
 interface MenuProps {

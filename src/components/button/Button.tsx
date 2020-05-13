@@ -3,12 +3,13 @@ import Classnames from 'classnames';
 import {Omit} from '../utils/utils';
 
 //todo 针对枚举的字符串
-declare const ButtonSizeList: ["large", "middle", "small"];
-declare type ButtonSize = (typeof ButtonSizeList)[number];
+// declare const ButtonSizeList: ["large", "middle", "small"];
+// declare type ButtonSize = (typeof ButtonSizeList)[number];
+type ButtonSize = 'large' | 'middle' | 'small';
 
-declare const ButtonTypes: ['primary', 'danger', 'default', 'link'];
-declare type ButtonType = (typeof ButtonTypes)[number];
-
+// declare const ButtonTypes: ['primary', 'danger', 'default', 'link'];
+// declare type ButtonType = (typeof ButtonTypes)[number];
+type ButtonType = 'primary' | 'danger' | 'default' | 'link';
 
 interface BaseButtonProps {
     className?: string;

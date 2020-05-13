@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react';
 import Classnames from 'classnames';
 import {MenuItemProps} from "./MenuItem";
 import {MenuContext} from "./Menu";
-
+import DefineTransition from '../transition/Transition';
 
 interface SubMenuProps {
     title: string,
@@ -51,9 +51,14 @@ const SubMenu: React.FC<SubMenuProps> = (props) => {
         });
 
         return (
-            <ul className={innerUlClassName}>
-                {childElement}
-            </ul>
+            <DefineTransition
+                in={isMenuOpen}
+                animation="zoom-in-top"
+            >
+                <ul className={innerUlClassName}>
+                    {childElement}
+                </ul>
+            </DefineTransition>
         );
     };
 
