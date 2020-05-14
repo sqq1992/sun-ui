@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC, ButtonHTMLAttributes, AnchorHTMLAttributes} from 'react';
 import Classnames from 'classnames';
 import {Omit} from '../utils/utils';
 
@@ -15,18 +15,29 @@ interface BaseButtonProps {
     className?: string;
     href?: string;
     target?: string;
+    /** 按钮失效状态 */
     disabled?: boolean;
+    /** 设置按钮大小 */
     size?: ButtonSize;
+    /** 设置按钮风格 */
     type?: ButtonType;
     children?: React.ReactNode;
 }
 
 
-type NativeButtonProps = BaseButtonProps & Omit<React.ButtonHTMLAttributes<HTMLElement>, 'type'>;
-type AnchorButtonProps = BaseButtonProps & Omit<React.AnchorHTMLAttributes<HTMLElement>, 'type'>;
+type NativeButtonProps = BaseButtonProps & Omit<ButtonHTMLAttributes<HTMLElement>, 'type'>;
+type AnchorButtonProps = BaseButtonProps & Omit<AnchorHTMLAttributes<HTMLElement>, 'type'>;
 type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>
 
-const Button: React.FC<ButtonProps> = (props) => {
+/**
+ * Button组件
+ * ### 引用方法
+ *
+ * ~~~js
+ * import { Button } from 'sun-ui'
+ * ~~~
+ */
+const Button: FC<ButtonProps> = (props) => {
     let {
         className,
         href,
