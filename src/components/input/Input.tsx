@@ -5,10 +5,14 @@ type InputSize = 'large' | 'default' | 'small';
 
 
 interface BaseInputProps {
+    value?: string;
+    /** 输入框实时内容 */
+    defaultValue?: string;
+    /** 输入框默认内容 */
     className?: string;
-    /** 按钮失效状态 */
+    /** 输入框失效状态 */
     disabled?: boolean;
-    /** 设置按钮大小 */
+    /** 设置输入框大小 */
     size?: InputSize;
     type: string;
     addonBefore?: React.ReactNode;
@@ -49,6 +53,11 @@ const Input: FC<InputProps> = (props) => {
         'input': true
     });
 
+    if('value' in resetProps){
+        delete resetProps.defaultValue;
+        resetProps.value = resetProps.value || '';
+    }
+
     return (
         <div className={boxClsName}>
             {addonBefore && (
@@ -72,6 +81,8 @@ const Input: FC<InputProps> = (props) => {
 };
 
 Input.defaultProps = {
+    value: '',
+    defaultValue: '',
     className: '',
     disabled: false,
     size: 'default',

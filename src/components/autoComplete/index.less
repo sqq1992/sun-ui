@@ -1,0 +1,37 @@
+
+
+.auto-input-complete-wrapper{
+  position: relative;
+
+  .result-list {
+    position: absolute;
+    left: 0;
+    top: calc(100% + 4px);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    border: @menu-border-width solid @menu-border-color;
+    box-shadow: @submenu-box-shadow;
+    white-space: nowrap;
+    background: @white;
+    border-radius: 6px;
+    overflow: hidden;
+    li {
+      padding: @menu-item-padding-y @menu-item-padding-x;
+      cursor: pointer;
+      transition: @menu-transition;
+      color: @body-color;
+      &.active {
+        background: @menu-item-active-color !important;
+        color: @white !important;
+      }
+      &:hover {
+        color: @menu-item-active-color;
+      }
+    }
+  }
+
+
+
+}

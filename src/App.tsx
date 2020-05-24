@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import './style/index.less';
 
@@ -8,8 +8,14 @@ import MenuItem from "./components/menu/MenuItem";
 import SubMenu from "./components/menu/SubMenu";
 import Icon from "./components/icon/Icon";
 import Input from './components/input/Input';
+import AutoComplete from "./components/autoComplete/AutoComplete";
 
 const App: React.FC = () => {
+
+    const [inputValue,setInputValue] = useState();
+
+    const [dataSource, setDataSource] = useState([] as any[]);
+
     return (
         <div className="App">
             <div className="button-box">
@@ -70,8 +76,21 @@ const App: React.FC = () => {
                 <Input
                     placeholder="电话号码"
                     addonBefore="手机"
+                    value={inputValue}
                     onChange={(e) => {
                         console.log('e', e.target.value);
+                        setInputValue(e.target.value);
+                    }}
+                />
+            </div>
+            <div style={{margin: '20px', width: "240px"}}>
+                <AutoComplete
+                    placeholder="搜索内容"
+                    dataSource={dataSource}
+                    onSearch={(searchText)=>{
+                        let resultDataSource = !searchText ? [] : [searchText, searchText.repeat(2), searchText.repeat(3)];
+                        console.log('resultDataSource', resultDataSource);
+                        setDataSource(resultDataSource);
                     }}
                 />
             </div>
