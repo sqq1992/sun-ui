@@ -1,8 +1,8 @@
-import React, {FC, InputHTMLAttributes, useEffect, useState} from 'react';
+import React, {FC, InputHTMLAttributes, KeyboardEvent, useEffect, useState, useRef, ChangeEvent} from 'react';
 import Classnames from 'classnames';
 import {pick} from 'lodash';
 import Input from '../input/Input';
-import { useDebounceValue } from '../../hooks/combineHooks';
+import { useDebounceValue, useClickOutArea } from '../../hooks/combineHooks';
 import DefineTransition from "../transition/Transition";
 
 
@@ -24,6 +24,8 @@ interface BaseProps {
     /** 输入框失效状态 */
     onSearch?: (value) => void;
     /** 输入框输入内容的回调函数 */
+    onSelect?: (value:object) => void;
+    /** 选择搜索列表的回调函数 */
     filterOption?: (inputValue, options) => void;
     /** 是否根据输入项进行筛选 */
 }
@@ -45,6 +47,7 @@ const AutoComplete: FC<FormatProps> = (props) => {
         className,
         disabled,
         onSearch,
+        onSelect,
         dataSource,
         filterOption,
         ...resetProps
@@ -52,12 +55,25 @@ const AutoComplete: FC<FormatProps> = (props) => {
     let resultValue = 'value' in resetProps ? resetProps.value : resetProps.defaultValue;
 
     const [inputValue, setInputValue] = useState(resultValue);
+    const [showDropDown, setDropDown] = useState(false);
+    const componentRef = useRef<HTMLDivElement>(null);
+    const triggerSearchRef = useRef(false);
+
+    //0 点击组件的外部事件
+    useClickOutArea(componentRef, () => {
+        setDropDown(false);
+    });
+
+    //0-1 input的focus时间
+    const handleFocus = () => {
+        setDropDown(true);
+    };
 
     //1 搜索关键词的debounceValue
     const [formatResult, setFormatResult] = useState<DataSourceMap[]>([]);
     const debounceValue = useDebounceValue(inputValue, 300);
     useEffect(() => {
-        if (debounceValue && dataSource?.length) {
+        if (debounceValue && dataSource?.length && triggerSearchRef.current) {
             let formatDataSource = dataSource.map((elem) => {
                 if (typeof elem === "object") {
                     return elem;
@@ -73,8 +89,11 @@ const AutoComplete: FC<FormatProps> = (props) => {
                     return filterOption(debounceValue, elem);
                 });
             } else {
+                let debounceArr = debounceValue.split('');
                 formatDataSource = formatDataSource.filter((elem) => {
-                    return elem.text.includes(debounceValue);
+                    return debounceArr.some((smallElem)=>{
+                        return elem.text.includes(smallElem);
+                    });
                 });
             }
             let tempHighLightIndex = formatDataSource.findIndex((elem)=>{
@@ -95,18 +114,58 @@ const AutoComplete: FC<FormatProps> = (props) => {
         if(onSearch){
             onSearch(tempValue);
         }
+        triggerSearchRef.current = true;
     };
 
-    let boxClsName = Classnames({
-        'auto-input-complete-wrapper': true,
-        'disabled': disabled,
-        [`${className}`]: true,
-    });
+    const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+        switch(e.keyCode) {
+            case 13:    //enter
+                if(formatResult[highLightIndex]){
+                    let detailItem = formatResult[highLightIndex];
+                    setInputValue(detailItem.text);
+                    if(onSelect){
+                        onSelect(detailItem);
+                    }
+                }
+                setDropDown(false);
+                triggerSearchRef.current = false;
+                break
+            case 38: {    //向上
+                let tempVal = (highLightIndex - 1 < 0) ? formatResult.length - 1 : highLightIndex - 1;
+                setHighLightIndex(tempVal);
+                break;
+            }
+            case 40: {    //向下
+                let tempVal = (highLightIndex + 1 >= formatResult.length) ? 0 : highLightIndex + 1;
+                setHighLightIndex(tempVal);
+                break;
+            }
+            case 27:  //esc
+                setDropDown(false);
+                break
+            default:
+                break
+        }
+    };
 
+    const handleClickItem = (arr) => {
+        let detailItem = arr[0];
+        let index = arr[1];
+
+        if(highLightIndex!==index){
+            setHighLightIndex(index);
+            setInputValue(detailItem.text);
+            if(onSelect){
+                onSelect(detailItem);
+            }
+        }
+        setDropDown(false);
+        triggerSearchRef.current = false;
+    };
 
     const setSearchResult = () => {
-        let isShowResult = !!formatResult.length;
-
+        let isShowResult = !!formatResult.length && showDropDown;
+        // console.log('isShowResult', formatResult, isShowResult, showDropDown);
         return (
             <DefineTransition
                 in={isShowResult}
@@ -118,6 +177,7 @@ const AutoComplete: FC<FormatProps> = (props) => {
                             <li
                                 key={elem.value}
                                 className={highLightIndex === index ? "active" : ""}
+                                onClick={handleClickItem.bind(null, [elem, index])}
                             >{elem.text}</li>
                         );
                     })}
@@ -126,12 +186,20 @@ const AutoComplete: FC<FormatProps> = (props) => {
         );
     };
 
+    let boxClsName = Classnames({
+        'auto-input-complete-wrapper': true,
+        'disabled': disabled,
+        [`${className}`]: true,
+    });
+
     return (
-        <div className={boxClsName}>
+        <div className={boxClsName} ref={componentRef}>
             <Input
                 disabled={disabled}
                 value={inputValue}
                 onChange={handleChangeInput}
+                onFocus={handleFocus}
+                onKeyDown={handleKeyDown}
                 {...pick(resetProps, ['placeholder'])}
             />
             {setSearchResult()}

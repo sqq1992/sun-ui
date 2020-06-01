@@ -92,6 +92,9 @@ const App: React.FC = () => {
                         console.log('resultDataSource', resultDataSource);
                         setDataSource(resultDataSource);
                     }}
+                    onSelect={(item)=>{
+                        console.log('onSelect', item);
+                    }}
                 />
             </div>
         </div>
