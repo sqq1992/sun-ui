@@ -3,9 +3,7 @@ import React, {useState} from 'react';
 import './style/index.less';
 
 import Button from './components/button/Button';
-import Menu from './components/menu/Menu';
-import MenuItem from "./components/menu/MenuItem";
-import SubMenu from "./components/menu/SubMenu";
+import Menu from './components/menu';
 import Icon from "./components/icon/Icon";
 import Input from './components/input/Input';
 import AutoComplete from "./components/autoComplete/AutoComplete";
@@ -32,44 +30,44 @@ const App: React.FC = () => {
                 <Menu onSelect={(index) => {
                     console.log('11', index)
                 }}>
-                    <MenuItem>
+                    <Menu.item>
                         3232
-                    </MenuItem>
-                    <MenuItem>
+                    </Menu.item>
+                    <Menu.item>
                         3333
-                    </MenuItem>
-                    <MenuItem>
+                    </Menu.item>
+                    <Menu.item>
                         4444
-                    </MenuItem>
-                    <SubMenu title="我的天">
-                        <MenuItem>
+                    </Menu.item>
+                    <Menu.subMenu title="我的天">
+                        <Menu.item>
                             我的天-1111
-                        </MenuItem>
-                        <MenuItem>
+                        </Menu.item>
+                        <Menu.item>
                             我的天-2222
-                        </MenuItem>
-                    </SubMenu>
+                        </Menu.item>
+                    </Menu.subMenu>
                 </Menu>
                 <Menu mode="vertical" defaultIndex="2" onSelect={(index) => {
                     console.log('11', index)
                 }}>
-                    <MenuItem>
+                    <Menu.item>
                         5555
-                    </MenuItem>
-                    <MenuItem>
+                    </Menu.item>
+                    <Menu.item>
                         6666
-                    </MenuItem>
-                    <MenuItem>
+                    </Menu.item>
+                    <Menu.item>
                         7777
-                    </MenuItem>
-                    <SubMenu title="我的天-vertiacal">
-                        <MenuItem>
+                    </Menu.item>
+                    <Menu.subMenu title="我的天-vertiacal">
+                        <Menu.item>
                             我的天-1111
-                        </MenuItem>
-                        <MenuItem>
+                        </Menu.item>
+                        <Menu.item>
                             我的天-2222
-                        </MenuItem>
-                    </SubMenu>
+                        </Menu.item>
+                    </Menu.subMenu>
                 </Menu>
             </div>
             <div style={{margin: '20px', width: "240px"}}>

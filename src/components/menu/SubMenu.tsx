@@ -4,7 +4,7 @@ import {MenuItemProps} from "./MenuItem";
 import {MenuContext} from "./Menu";
 import DefineTransition from '../transition/Transition';
 
-interface SubMenuProps {
+export interface SubMenuProps {
     title: string,
     className?: string;
     style?: React.CSSProperties,

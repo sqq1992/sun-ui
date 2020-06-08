@@ -4,7 +4,7 @@ import {MenuItemProps} from "./MenuItem";
 
 type modeText = 'horizontal' | 'vertical';
 
-interface MenuProps {
+export interface MenuProps {
     className?: string;
     mode?: modeText,
     defaultIndex?: string,
