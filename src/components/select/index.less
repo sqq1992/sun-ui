@@ -1,0 +1,112 @@
+
+
+.select-wrapper{
+  display: flex;
+  position: relative;
+
+  .select-wrapper-box{
+    width: 100%;
+    position: relative;
+    font-size: @select-font-size-base;
+    font-weight: @select-font-weight-base;
+    height: @select-height-default;
+    line-height: @select-height-default;
+    color: @select-color;
+    background-color: @select-bg;
+    border: 1px solid @gray-400;
+    border-radius: @border-radius;
+    transition: all .15s ease-in-out;
+    cursor: pointer;
+
+    &:hover{
+      border-color: @primary !important;
+    }
+
+    .select-input-box{
+      padding-right: 35px;
+      height: 100%;
+      line-height: 0;
+      padding-left: 10px;
+      .select-input{
+        height: 100%;
+        border: 0 none;
+        width: 100%;
+        cursor: pointer;
+        &:focus{
+          outline: 0 none;
+        }
+      }
+    }
+
+    .select-icon-box{
+      position: absolute;
+      right: 0;
+      top: 0;
+      height: 100%;
+      width: 35px;
+      text-align: center;
+      .select-icon{
+        transition: all 0.15s ease-in-out;
+        display: inline-block;
+        height: 100%;
+        vertical-align: top;
+      }
+    }
+
+  }
+
+  &.isShowResult{
+    .select-wrapper-box{
+      .select-icon-box{
+        .select-icon{
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+
+
+  .select-filter-ul{
+    position: absolute;
+    left: 0;
+    top: calc(100% + 4px);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    border: 1px solid @border-color;
+    box-shadow: @box-shadow-base;
+    white-space: nowrap;
+    background: @white;
+    border-radius: 6px;
+    overflow: hidden;
+    .select-filter-li{
+      padding: @select-item-padding-y @select-item-padding-x;
+      cursor: pointer;
+      transition: all .15s ease-in-out;
+      color: @body-color;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      &:hover{
+        background-color: rgba(13, 110, 253, 0.1);
+      }
+      &.selected{
+        background-color: rgba(13, 110, 253, 0.1);
+      }
+      &.disabled{
+        color: @gray-600;
+        background: #fff;
+        //pointer-events: none;
+        cursor: no-drop;
+      }
+
+    }
+
+  }
+
+
+
+
+
+}

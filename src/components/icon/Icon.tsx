@@ -1,23 +1,37 @@
 import React from 'react';
-import { FontAwesomeIcon, FontAwesomeIconProps } from '@fortawesome/react-fontawesome'
 import Classnames from 'classnames';
-import { fas } from '@fortawesome/free-solid-svg-icons'
-import { library } from '@fortawesome/fontawesome-svg-core'
-library.add(fas)
 
-const Icon: React.FC<FontAwesomeIconProps> = (props) => {
-    const {className,...restProps} = props;
+type iconSize = "small" | "default" | "large";
 
-    const iconClassName = Classnames('sun-icon', {
-        [`${className}`]: true
+interface IconProps {
+    type: string,
+    className?: string,
+    size?: iconSize;
+    style?: React.CSSProperties;
+}
+
+
+const Icon: React.FC<IconProps> = (props) => {
+    const {className, type, size, style, ...restProps} = props;
+
+    const iconClassName = Classnames('iconfont', {
+        [`${type} ${size}`]: true,
+        [`${className}`]:true,
     });
 
     return (
-        <FontAwesomeIcon
+        <i
+            style={style}
             className={iconClassName}
             {...restProps}
         />
     );
+};
+
+Icon.defaultProps = {
+    type: "",
+    size: "default",
+    className: ""
 };
 
 export default Icon;

@@ -1,12 +1,18 @@
 import React, {useState} from 'react';
 
-import './style/index.less';
+//todo 套娃引用sun-ui
+// import "sun-ui/dist/index.css";
+// import {Button, Menu, Input, AutoComplete} from "sun-ui";
 
+// 开发的
+import './style/index.less';
 import Button from './components/button/Button';
 import Menu from './components/menu';
 import Icon from "./components/icon/Icon";
 import Input from './components/input/Input';
 import AutoComplete from "./components/autoComplete/AutoComplete";
+import Select from "./components/select";
+const Option = Select.option;
 
 const App: React.FC = () => {
 
@@ -14,8 +20,13 @@ const App: React.FC = () => {
 
     const [dataSource, setDataSource] = useState([] as any[]);
 
+    const [testSelectVal, setTestSelectVal] = useState('tade');
+
     return (
         <div className="App">
+            <div>
+                <Icon type="iconxiangxia" />
+            </div>
             <div className="button-box">
                 <Button type="default" autoFocus={true}>default</Button>
                 <Button type="primary">primary</Button>
@@ -94,6 +105,19 @@ const App: React.FC = () => {
                         console.log('onSelect', item);
                     }}
                 />
+            </div>
+            <div style={{margin: '20px', width: "240px"}}>
+                <Select
+                    placeholder="请选择"
+                    // value={testSelectVal}
+                    onChange={(value)=>{
+                        setTestSelectVal(value);
+                    }}
+                >
+                    <Option value="wde" disabled={true}>我的</Option>
+                    <Option value="tade">他的</Option>
+                    <Option value="nide">你的</Option>
+                </Select>
             </div>
         </div>
     );
