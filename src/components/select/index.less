@@ -4,6 +4,20 @@
   display: flex;
   position: relative;
 
+  &.disabled{
+    .select-wrapper-box{
+      background-color: @select-disabled-bg;
+      cursor: not-allowed;
+      .select-input{
+        background-color: @select-disabled-bg;
+      }
+      &:hover{
+        border-color: @gray-400;
+      }
+    }
+
+  }
+
   .select-wrapper-box{
     width: 100%;
     position: relative;
@@ -19,7 +33,7 @@
     cursor: pointer;
 
     &:hover{
-      border-color: @primary !important;
+      border-color: @primary;
     }
 
     .select-input-box{

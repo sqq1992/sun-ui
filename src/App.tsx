@@ -110,6 +110,7 @@ const App: React.FC = () => {
                 <Select
                     placeholder="请选择"
                     // value={testSelectVal}
+                    // disabled={true}
                     onChange={(value)=>{
                         setTestSelectVal(value);
                     }}

@@ -6,8 +6,6 @@ import { selectOptionProps } from './Option';
 import {useClickOutArea} from "../../hooks/combineHooks";
 
 
-
-
 export interface SelectProps {
     value?: string | number;
     /** 输入框选择内容 */
@@ -70,14 +68,16 @@ const Select: FC<SelectProps> = (props) => {
     let resultText = resultObj ? resultObj.props.children : '';
 
     let handleClickInput = () => {
-        setDropDown(!showDropDown);
+        if(!disabled){
+            setDropDown(!showDropDown);
+        }
     };
 
     //点击外部事件
     useClickOutArea(componentRef, () => {
         setDropDown(false);
     },()=>{
-        setDropDown(true);
+        // setDropDown(true);
     });
 
     let selectOnChange = (value) => {
