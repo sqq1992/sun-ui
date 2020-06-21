@@ -1,0 +1,49 @@
+
+.sun-modal-root{
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  bottom: 0;
+
+  .modal-content{
+    position: relative;
+    background: #fff;
+    z-index: 2;
+    margin: 0 auto;
+    top:100px;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    width: 500px;
+  }
+
+  &.modal-centered{
+    text-align: center;
+    &:before{
+      display: inline-block;
+      vertical-align: middle;
+      width: 0;
+      content: '';
+      height: 100%;
+    }
+    .modal-content{
+      top: 0;
+      display: inline-block;
+      text-align: left;
+      vertical-align: middle;
+    }
+  }
+
+  .modal-mask{
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.45);
+  }
+
+}

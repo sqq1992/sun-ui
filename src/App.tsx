@@ -13,6 +13,7 @@ import Input from './components/input/Input';
 import AutoComplete from "./components/autoComplete/AutoComplete";
 import Tabs from './components/tabs';
 import Select from "./components/select";
+import Modal from "./components/modal/Modal";
 const Option = Select.option;
 
 const Tabs1: React.FC = () => {
@@ -135,10 +136,18 @@ const App: React.FC = () => {
                         Content of Tab Pane 1
                     </Tabs.TabPane>
                     <Tabs.TabPane tab="Tab 2" key="2">
-                        <Tabs1 />
+                        <Tabs1/>
                     </Tabs.TabPane>
                 </Tabs>
 
+            </div>
+            <div>
+                <Modal
+                    title="标题"
+                    centered={true}
+                >
+                    <div>wp shi sun</div>
+                </Modal>
             </div>
         </div>
     );
