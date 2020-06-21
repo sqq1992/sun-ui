@@ -1,0 +1,32 @@
+
+.tabs-wrapper{
+
+  .tabs-nav-wrap {
+    margin-bottom: @tabs-margin-bottom;
+  }
+
+  .tabs-nav-list{
+    border-bottom: 1px solid @border-color;
+    .tabs-nav {
+      display: inline-block;
+      padding: @base-padding-y @base-padding-x;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      &.active{
+        border-bottom: 2px solid @primary;
+      }
+      &.disabled{
+        color: @secondary;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  .tabs-cont{
+    .tabs-cont-li{
+      display: none;
+    }
+  }
+
+
+}

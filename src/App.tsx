@@ -11,8 +11,16 @@ import Menu from './components/menu';
 import Icon from "./components/icon/Icon";
 import Input from './components/input/Input';
 import AutoComplete from "./components/autoComplete/AutoComplete";
+import Tabs from './components/tabs';
 import Select from "./components/select";
 const Option = Select.option;
+
+const Tabs1: React.FC = () => {
+    console.log('Tabs1');
+    return(
+        <div>Tabs2</div>
+    )
+};
 
 const App: React.FC = () => {
 
@@ -25,7 +33,7 @@ const App: React.FC = () => {
     return (
         <div className="App">
             <div>
-                <Icon type="iconxiangxia" />
+                <Icon type="iconxiangxia"/>
             </div>
             <div className="button-box">
                 <Button type="default" autoFocus={true}>default</Button>
@@ -96,12 +104,12 @@ const App: React.FC = () => {
                 <AutoComplete
                     placeholder="搜索内容"
                     dataSource={dataSource}
-                    onSearch={(searchText)=>{
+                    onSearch={(searchText) => {
                         let resultDataSource = !searchText ? [] : [searchText, searchText.repeat(2), searchText.repeat(3)];
                         console.log('resultDataSource', resultDataSource);
                         setDataSource(resultDataSource);
                     }}
-                    onSelect={(item)=>{
+                    onSelect={(item) => {
                         console.log('onSelect', item);
                     }}
                 />
@@ -111,7 +119,7 @@ const App: React.FC = () => {
                     placeholder="请选择"
                     // value={testSelectVal}
                     // disabled={true}
-                    onChange={(value)=>{
+                    onChange={(value) => {
                         setTestSelectVal(value);
                     }}
                 >
@@ -119,6 +127,18 @@ const App: React.FC = () => {
                     <Option value="tade">他的</Option>
                     <Option value="nide">你的</Option>
                 </Select>
+            </div>
+            <div>
+
+                <Tabs>
+                    <Tabs.TabPane tab="Tab 1" key="1">
+                        Content of Tab Pane 1
+                    </Tabs.TabPane>
+                    <Tabs.TabPane tab="Tab 2" key="2">
+                        <Tabs1 />
+                    </Tabs.TabPane>
+                </Tabs>
+
             </div>
         </div>
     );
