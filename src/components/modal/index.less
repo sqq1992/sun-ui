@@ -1,49 +1,98 @@
 
 .sun-modal-root{
-  position: fixed;
-  z-index: 1000;
-  top: 0;
-  left: 0;
-  width: 100%;
-  bottom: 0;
 
-  .modal-content{
-    position: relative;
-    background: #fff;
-    z-index: 2;
-    margin: 0 auto;
-    top:100px;
-    border-radius: 4px;
-    -webkit-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    width: 500px;
+  //动画样式
+  &.zoom-modal-in-top-enter{
+    .modal-wrap,
+    .modal-mask{
+      .zoom-init-state(0, scaleY(0));
+    }
   }
 
-  &.modal-centered{
-    text-align: center;
-    &:before{
-      display: inline-block;
-      vertical-align: middle;
-      width: 0;
-      content: '';
-      height: 100%;
+  &.zoom-modal-in-top-enter-active{
+    .modal-wrap,
+    .modal-mask{
+      .zoom-run-state(1, scaleY(1), center top);
     }
-    .modal-content{
-      top: 0;
-      display: inline-block;
-      text-align: left;
-      vertical-align: middle;
+  }
+
+  &.zoom-modal-in-top-enter-done{
+    .modal-wrap,
+    .modal-mask{
+      .zoom-init-state(1, scaleY(1));
     }
+  }
+
+  &.zoom-modal-in-top-exit-active{
+    .modal-wrap,
+    .modal-mask{
+      .zoom-run-state(0, scaleY(0), center top);
+    }
+  }
+
+
+  // 基本的弹窗样式
+  &.modal-hidden {
+    display: none;
+    .modal-wrap,
+    .modal-mask {
+      transition: none;
+    }
+  }
+
+  .modal-wrap{
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    bottom: 0;
+    overflow: auto;
   }
 
   .modal-mask{
-    position: absolute;
-    z-index: 1;
+    position: fixed;
+    z-index: 1000;
     top: 0;
     left: 0;
     width: 100%;
     bottom: 0;
     background: rgba(0, 0, 0, 0.45);
+  }
+
+  &.modal-centered{
+    .modal-wrap{
+      text-align: center;
+      &:before{
+        display: inline-block;
+        vertical-align: middle;
+        width: 0;
+        content: '';
+        height: 100%;
+      }
+      .sun-modal{
+        top: 0;
+        display: inline-block;
+        text-align: left;
+        vertical-align: middle;
+      }
+    }
+  }
+
+  .sun-modal{
+    position: relative;
+    margin: 0 auto;
+    top:100px;
+    width: 500px;
+    padding-bottom: 24px;
+  }
+
+  .modal-content{
+    background: #fff;
+    z-index: 2;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
 
 }

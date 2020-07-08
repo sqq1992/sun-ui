@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {Component, useState} from 'react';
 
 //todo 套娃引用sun-ui
 // import "sun-ui/dist/index.css";
@@ -16,6 +16,20 @@ import Select from "./components/select";
 import Modal from "./components/modal/Modal";
 const Option = Select.option;
 
+
+class TempCom extends Component{
+
+   componentDidMount() {
+       console.log('TempCom');
+   }
+
+    render() {
+       return (
+           <div>TempCom</div>
+       );
+   }
+}
+
 const Tabs1: React.FC = () => {
     console.log('Tabs1');
     return(
@@ -31,13 +45,23 @@ const App: React.FC = () => {
 
     const [testSelectVal, setTestSelectVal] = useState('tade');
 
+    const [modalVisible,setModalVisible] = useState(false);
+
+    let handleOpenModal = () => {
+        setModalVisible(true);
+    };
+
+    let handleCloseModal = () => {
+        setModalVisible(false);
+    };
+
     return (
         <div className="App">
             <div>
                 <Icon type="iconxiangxia"/>
             </div>
             <div className="button-box">
-                <Button type="default" autoFocus={true}>default</Button>
+                <Button type="default" autoFocus={true} onClick={handleOpenModal}>openModal</Button>
                 <Button type="primary">primary</Button>
                 <Button type="danger">danger</Button>
                 <Button type="link">link</Button>
@@ -136,17 +160,21 @@ const App: React.FC = () => {
                         Content of Tab Pane 1
                     </Tabs.TabPane>
                     <Tabs.TabPane tab="Tab 2" key="2">
-                        <Tabs1/>
+                        Content of Tab Pane 2
                     </Tabs.TabPane>
                 </Tabs>
 
             </div>
             <div>
+                <div>sunMOdal</div>
                 <Modal
                     title="标题"
                     centered={true}
+                    visible={modalVisible}
+                    onCancel={handleCloseModal}
                 >
                     <div>wp shi sun</div>
+                    <TempCom />
                 </Modal>
             </div>
         </div>

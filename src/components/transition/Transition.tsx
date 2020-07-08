@@ -2,16 +2,18 @@
 import React from 'react';
 import { CSSTransition } from 'react-transition-group';
 
-type AnimationName = 'zoom-in-top' | 'zoom-in-left' | 'zoom-in-bottom' | 'zoom-in-right';
+type AnimationName = 'zoom-in-top' | 'zoom-in-left' | 'zoom-in-bottom' | 'zoom-in-right' | 'zoom-modal-in-top';
 
 interface CombineCssTransitionProps {
     className?: string;
-    in: boolean;
+    in?: boolean;
     appear?: boolean;
     unmountOnExit?: boolean;
     animation?: AnimationName;
     timeout?: number;
-    children?: React.ReactNode
+    children?: React.ReactNode,
+    onEnter?: () => void,
+    onExited?: () => void,
 };
 
 
