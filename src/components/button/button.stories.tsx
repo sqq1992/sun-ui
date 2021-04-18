@@ -20,5 +20,5 @@ const buttonTypes = () => {
 
 
 storiesOf('Button', module)
-    .add('Button', defaultButton)
+    .add('按钮默认属性', defaultButton)
     .add('按钮风格大小', buttonTypes)

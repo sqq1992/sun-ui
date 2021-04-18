@@ -12,8 +12,11 @@ type ButtonSize = 'large' | 'middle' | 'small';
 type ButtonType = 'primary' | 'danger' | 'default' | 'link';
 
 interface BaseButtonProps {
+    /** 按钮额外的类名 */
     className?: string;
+    /** 点击跳转的地址, 与a链接一样 */
     href?: string;
+    /** 相当于a链接跳转的地址 */
     target?: string;
     /** 按钮失效状态 */
     disabled?: boolean;
@@ -37,17 +40,17 @@ type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>
  * import { Button } from 'sun-ui'
  * ~~~
  */
-const Button: FC<ButtonProps> = (props) => {
-    let {
-        className,
-        href,
-        target,
-        disabled,
-        size,
-        type,
-        children,
-        ...resetProps
-    } = props;
+const Button: FC<ButtonProps> = ({
+     className = '',
+     href,
+     target,
+     disabled = false,
+     size = "middle",
+     type = "default",
+     children,
+     ...resetProps
+}) => {
+
 
     let btnClassName = Classnames('btn', {
         [`btn-${type} btn-${size} ${className}`]: true,
@@ -74,13 +77,6 @@ const Button: FC<ButtonProps> = (props) => {
             {...resetProps}
         >{children}</button>
     );
-};
-
-Button.defaultProps = {
-    className: '',
-    disabled: false,
-    size: 'middle',
-    type: 'default'
 };
 
 export default Button;
