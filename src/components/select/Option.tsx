@@ -1,7 +1,6 @@
-import React, {FC, useContext, KeyboardEvent, useEffect, useState, useRef} from 'react';
+import React, {FC, useContext} from 'react';
 import Classnames from 'classnames';
 import { SelectContext } from './Select';
-
 
 
 export interface selectOptionProps {
@@ -13,8 +12,6 @@ export interface selectOptionProps {
     className?: string;
     disabled?: boolean;
 }
-
-
 
 
 /**

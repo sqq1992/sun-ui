@@ -15,28 +15,28 @@ import Input from './components/input/Input';
 import AutoComplete from "./components/autoComplete/AutoComplete";
 import Tabs from './components/tabs';
 import Select from "./components/select";
-import Modal from "./components/modal/Modal";
+import Modal from "./components/modal";
 const Option = Select.option;
 
 
-class TempCom extends Component{
+const TempCom = () => {
 
-   componentDidMount() {
-       console.log('TempCom');
-   }
+    const [modalVisible,setModalVisible] = useState(false);
 
-    render() {
-       return (
-           <div>TempCom</div>
-       );
-   }
-}
-
-const Tabs1: React.FC = () => {
-    console.log('Tabs1');
-    return(
-        <div>Tabs2</div>
-    )
+    return (
+        <div>
+            <Modal
+                title="标题2"
+                centered={true}
+                visible={modalVisible}
+            >
+                <div>我的天2内容</div>
+            </Modal>
+            <div onClick={()=>{
+                setModalVisible(true)
+            }}>我的天2</div>
+        </div>
+    );
 };
 
 const App: React.FC = () => {
@@ -50,7 +50,12 @@ const App: React.FC = () => {
     const [modalVisible,setModalVisible] = useState(false);
 
     let handleOpenModal = () => {
-        setModalVisible(true);
+
+        //todo 1
+        // setModalVisible(true);
+
+        //todo 2
+        Modal.info();
     };
 
     let handleCloseModal = () => {
@@ -172,6 +177,7 @@ const App: React.FC = () => {
                 <Modal
                     title="标题"
                     centered={true}
+                    destroyOnClose={true}
                     visible={modalVisible}
                     onCancel={handleCloseModal}
                     onOk={handleCloseModal}

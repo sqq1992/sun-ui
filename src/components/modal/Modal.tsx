@@ -5,12 +5,12 @@ import Button from '../button/Button';
 import DefineTransition from "../transition/Transition";
 import Portal from "../portal/Portal";
 
-
 export interface ModalProps {
     className?: string;
     afterClose?: () => void;
     onCancel?: () => void;
     onOk?: () => void;
+    onExited?: () => void;
     bodyStyle?: React.CSSProperties;
     cancelText?: string;
     okText?: string;
@@ -24,6 +24,8 @@ export interface ModalProps {
     maskclosable?: boolean;
     visible: boolean;
     width?: string;
+    isShowModalHead?: boolean;
+    isPortal?: boolean;
 }
 
 /**
@@ -48,11 +50,15 @@ const Modal: FC<ModalProps> = ({
        visible = false,
        onCancel ,
        onOk,
+       onExited,
        destroyOnClose = false,
+       isShowModalHead = true,
+       isPortal = true
 }) => {
 
 
     const bodyOverflow = useRef(window.getComputedStyle(document.body).overflow);
+    const showContentRef = useRef<HTMLDivElement>(null);
     const [isShowAnimate, setIsShowAnimate] = useState(false);
     const [isShowDisplay, setIsShowDisplay] = useState(false);
     const isFirstVisible = useRef(false);
@@ -91,7 +97,6 @@ const Modal: FC<ModalProps> = ({
         }
     };
 
-
     // format value
     let boxClsName = Classnames({
         'sun-modal-root': true,
@@ -118,6 +123,7 @@ const Modal: FC<ModalProps> = ({
 
     return (
         <Portal
+            isPortal={isPortal}
             visible={visible}
         >
             <DefineTransition
@@ -125,24 +131,27 @@ const Modal: FC<ModalProps> = ({
                 unmountOnExit={destroyOnClose}
                 onExited={() => {
                     setIsShowDisplay(visible);
+                    onExited && onExited();
                 }}
                 animation="zoom-modal-in-top"
             >
-                <div className={boxClsName}>
+                <div className={boxClsName} >
                     {mask && (
                         <div className="modal-mask" />
                     )}
                     <div className="modal-wrap">
-                        <div className="sun-modal">
+                        <div className="sun-modal" ref={showContentRef}>
                             <div className="modal-content">
-                                <div className="modal-head">
-                                    <div className="modal-head-title">{title}</div>
-                                    {closable && (
-                                        <div className="modal-close-icon" onClick={handleClose}>
-                                            <Icon type="icondelete" className="delete-icon"/>
-                                        </div>
-                                    )}
-                                </div>
+                                {isShowModalHead && (
+                                    <div className="modal-head">
+                                        <div className="modal-head-title">{title}</div>
+                                        {closable && (
+                                            <div className="modal-close-icon" onClick={handleClose}>
+                                                <Icon type="icondelete" className="delete-icon"/>
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
                                 <div className="modal-body" style={bodyStyle}>
                                     {children}
                                 </div>
