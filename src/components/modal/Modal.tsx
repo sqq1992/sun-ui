@@ -8,9 +8,9 @@ import Portal from "../portal/Portal";
 
 export interface ModalProps {
     className?: string;
-    afterClose?: () => {};
+    afterClose?: () => void;
     onCancel?: () => void;
-    onOk?: () => {};
+    onOk?: () => void;
     bodyStyle?: React.CSSProperties;
     cancelText?: string;
     okText?: string;
@@ -34,25 +34,25 @@ export interface ModalProps {
  * import { Input } from 'sun-ui'
  * ~~~
  */
-const Modal: FC<ModalProps> = (props) => {
-    let {
-        className,
-        children,
-        cancelText,
-        okText,
-        bodyStyle,
-        closable,
-        title,
-        footer,
-        centered,
-        mask,
-        visible,
-        onCancel,
-        destroyOnClose
-    } = props;
+const Modal: FC<ModalProps> = ({
+       className = '',
+       children,
+       cancelText = '取消',
+       okText = '确定',
+       bodyStyle,
+       closable = true,
+       title,
+       footer,
+       centered = false,
+       mask = true,
+       visible = false,
+       onCancel ,
+       onOk,
+       destroyOnClose = false,
+}) => {
+
 
     const bodyOverflow = useRef(window.getComputedStyle(document.body).overflow);
-    const componentRef = useRef<HTMLDivElement>(null);
     const [isShowAnimate, setIsShowAnimate] = useState(false);
     const [isShowDisplay, setIsShowDisplay] = useState(false);
     const isFirstVisible = useRef(false);
@@ -85,6 +85,12 @@ const Modal: FC<ModalProps> = (props) => {
         }
     };
 
+    const handleOk = () => {
+        if (onOk) {
+            onOk();
+        }
+    };
+
 
     // format value
     let boxClsName = Classnames({
@@ -104,8 +110,8 @@ const Modal: FC<ModalProps> = (props) => {
         }
         return (
             <div className="modal-footer">
-                <Button className="">{cancelText}</Button>
-                <Button type="primary">{okText}</Button>
+                <Button className="" onClick={handleClose}>{cancelText}</Button>
+                <Button type="primary" onClick={handleOk}>{okText}</Button>
             </div>
         )
     };
@@ -122,18 +128,18 @@ const Modal: FC<ModalProps> = (props) => {
                 }}
                 animation="zoom-modal-in-top"
             >
-                <div className={boxClsName} ref={componentRef}>
+                <div className={boxClsName}>
                     {mask && (
-                        <div className="modal-mask"></div>
+                        <div className="modal-mask" />
                     )}
                     <div className="modal-wrap">
                         <div className="sun-modal">
                             <div className="modal-content">
                                 <div className="modal-head">
-                                    <div className="head-title">{title}</div>
+                                    <div className="modal-head-title">{title}</div>
                                     {closable && (
                                         <div className="modal-close-icon" onClick={handleClose}>
-                                            <Icon type="icondelete"/>
+                                            <Icon type="icondelete" className="delete-icon"/>
                                         </div>
                                     )}
                                 </div>
@@ -151,17 +157,5 @@ const Modal: FC<ModalProps> = (props) => {
     );
 };
 
-Modal.defaultProps = {
-    className: "",
-    cancelText: "取消",
-    okText: "确定",
-    centered: false,
-    closable: true,
-    destroyOnClose: false,
-    keyboard: true,
-    mask: true,
-    maskclosable: true,
-    visible: false,
-};
 
 export default Modal;

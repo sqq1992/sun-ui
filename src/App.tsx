@@ -174,6 +174,7 @@ const App: React.FC = () => {
                     centered={true}
                     visible={modalVisible}
                     onCancel={handleCloseModal}
+                    onOk={handleCloseModal}
                 >
                     <div>wp shi sun</div>
                     <TempCom />

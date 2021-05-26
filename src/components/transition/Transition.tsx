@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React from 'react';
 import { CSSTransition } from 'react-transition-group';
 
@@ -24,7 +23,7 @@ const DefineTransition: React.FC<CombineCssTransitionProps> = (props) => {
     return (
         <CSSTransition
             classNames={combineClassName}
-            {...restProps}
+            {...restProps as any}
         >
             {children}
         </CSSTransition>
