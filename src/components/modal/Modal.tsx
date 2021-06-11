@@ -23,7 +23,7 @@ export interface ModalProps {
     mask?: boolean;
     maskclosable?: boolean;
     visible: boolean;
-    width?: string;
+    width?: number;
     isShowModalHead?: boolean;
     isPortal?: boolean;
 }
@@ -53,12 +53,12 @@ const Modal: FC<ModalProps> = ({
        onExited,
        destroyOnClose = false,
        isShowModalHead = true,
-       isPortal = true
+       isPortal = true,
+    width
 }) => {
 
 
     const bodyOverflow = useRef(window.getComputedStyle(document.body).overflow);
-    const showContentRef = useRef<HTMLDivElement>(null);
     const [isShowAnimate, setIsShowAnimate] = useState(false);
     const [isShowDisplay, setIsShowDisplay] = useState(false);
     const isFirstVisible = useRef(false);
@@ -76,8 +76,6 @@ const Modal: FC<ModalProps> = ({
                 setIsShowDisplay(visible);
                 setIsShowAnimate(visible);
             }
-
-
         } else {
             document.body.style.overflow = bodyOverflow.current;
             setIsShowAnimate(visible);
@@ -107,11 +105,7 @@ const Modal: FC<ModalProps> = ({
 
     let setFooter = () => {
         if (footer) {
-            return (
-                <div className="modal-footer">
-                    {footer}
-                </div>
-            )
+            return footer
         }
         return (
             <div className="modal-footer">
@@ -140,7 +134,7 @@ const Modal: FC<ModalProps> = ({
                         <div className="modal-mask" />
                     )}
                     <div className="modal-wrap">
-                        <div className="sun-modal" ref={showContentRef}>
+                        <div className="sun-modal" style={{width}}>
                             <div className="modal-content">
                                 {isShowModalHead && (
                                     <div className="modal-head">

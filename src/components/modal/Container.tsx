@@ -1,9 +1,13 @@
-import React, {FC, useState, useRef, useEffect} from 'react';
+import React, {FC, useState} from 'react';
 import Modal, { ModalProps } from "./Modal";
 import ReactDOM from 'react-dom';
+import Button from "../button/Button";
 
 export interface containerProps extends Omit<ModalProps,'visible'>{
-    onRemove: () => void
+    onRemove?: () => void
+    icon?: React.ReactNode
+    type?: 'info' | 'success' | 'error' | 'warning' | 'confirm'
+    content?: React.ReactNode
 }
 
 /**
@@ -16,15 +20,47 @@ export interface containerProps extends Omit<ModalProps,'visible'>{
  */
 const ContainerModal: FC<containerProps> = ({
        className = '',
-       cancelText = '取消',
-       okText = '确定',
-       title,
-       centered = false,
+       cancelText = '',
+        onRemove,
+       okText = '知道了',
+       title="提示信息",
        onCancel ,
        onOk,
+        icon,
+        width = 416,
+        type = "info",
+        content
 }) => {
 
     const [visible, setVisible] = useState(true);
+
+
+    const handleCancel = () => {
+        setVisible(false)
+        onCancel && onCancel();
+    };
+    const handleOk = () => {
+        setVisible(false)
+        onOk && onOk();
+    };
+
+    const handleExitedCb = () => {
+        onRemove && onRemove();
+    };
+
+    let footer = null as any;
+    if(okText || cancelText){
+        footer = (
+            <div className="container-btns">
+                {cancelText && (
+                    <Button className="" onClick={handleCancel}>{cancelText}</Button>
+                )}
+                {okText && (
+                    <Button type="primary" onClick={handleOk}>{okText}</Button>
+                )}
+            </div>
+        )
+    }
 
     return (
         <Modal
@@ -33,15 +69,21 @@ const ContainerModal: FC<containerProps> = ({
             isShowModalHead={false}
             visible={visible}
             destroyOnClose={true}
+            footer={footer}
+            width={width}
+            className={`${className} ${type}`}
+            onExited={handleExitedCb}
         >
-            <div onClick={()=>{
-                setVisible(false);
-            }}>woshitiancai</div>
+            <div className="container-body">
+                <div className="con-ico">{icon}</div>
+                <div className="con-title">{title}</div>
+                <div className="con-cont">{content}</div>
+            </div>
         </Modal>
     );
 };
 
-export default function Container() {
+export default function Container(props:containerProps) {
     const div = document.createElement('div');
     document.body.appendChild(div);
 
@@ -53,7 +95,7 @@ export default function Container() {
     }
 
     ReactDOM.render(
-        <ContainerModal onRemove={removeChild} />, div
+        <ContainerModal onRemove={removeChild} {...props} />, div
     );
 }
 

@@ -3,20 +3,21 @@ import React, {Component, useState} from 'react';
 //todo 测试UI库
 
 //todo 套娃引用sun-ui
-// import "sun-ui/dist/index.css";
-// import {Button, Menu, Input, AutoComplete} from "sun-ui";
+import "sun-ui/dist/index.css";
+import {Button, Menu, Input, AutoComplete, Icon, Modal, Tabs, Select} from "sun-ui";
+const Option = Select.option;
 
 // 开发的
-import './style/index.less';
-import Button from './components/button/Button';
-import Menu from './components/menu';
-import Icon from "./components/icon/Icon";
-import Input from './components/input/Input';
-import AutoComplete from "./components/autoComplete/AutoComplete";
-import Tabs from './components/tabs';
-import Select from "./components/select";
-import Modal from "./components/modal";
-const Option = Select.option;
+// import './style/index.less';
+// import Button from './components/button/Button';
+// import Menu from './components/menu';
+// import Icon from "./components/icon/Icon";
+// import Input from './components/input/Input';
+// import AutoComplete from "./components/autoComplete/AutoComplete";
+// import Tabs from './components/tabs';
+// import Select from "./components/select";
+// import Modal from "./components/modal";
+// const Option = Select.option;
 
 
 const TempCom = () => {
@@ -55,7 +56,12 @@ const App: React.FC = () => {
         // setModalVisible(true);
 
         //todo 2
-        Modal.info();
+        Modal.confirm({
+            content:'我的天',
+            // onOk:()=>{
+            //     console.log('wde')
+            // }
+        });
     };
 
     let handleCloseModal = () => {
@@ -125,11 +131,12 @@ const App: React.FC = () => {
                 <Input
                     placeholder="电话号码"
                     addonBefore="手机"
-                    value={inputValue}
-                    onChange={(e) => {
-                        console.log('e', e.target.value);
-                        setInputValue(e.target.value);
-                    }}
+                    defaultValue="我的"
+                    // value={inputValue}
+                    // onChange={(e) => {
+                    //     console.log('e', e.target.value);
+                    //     setInputValue(e.target.value);
+                    // }}
                 />
             </div>
             <div style={{margin: '20px', width: "240px"}}>

@@ -32,16 +32,13 @@ type InputProps = Partial<NativeInputProps>
  * import { Input } from 'sun-ui'
  * ~~~
  */
-const Input: FC<InputProps> = (props) => {
-    let {
-        className,
-        disabled,
-        size,
-        type,
-        addonBefore,
-        addonAfter,
-        ...resetProps
-    } = props;
+const Input: FC<InputProps> = ({
+   disabled = false,
+   type = 'text',
+   addonBefore = '',
+   addonAfter = '',
+    ...resetProps
+}) => {
 
     let boxClsName = Classnames({
         'input-wrapper': true,
@@ -69,7 +66,7 @@ const Input: FC<InputProps> = (props) => {
                 className={inputClassName}
                 type={type}
                 disabled={disabled}
-                {...resetProps}
+                {...resetProps as any}
             />
             {addonAfter && (
                 <div className="input-addon input-addon-after">
@@ -80,15 +77,6 @@ const Input: FC<InputProps> = (props) => {
     );
 };
 
-Input.defaultProps = {
-    value: '',
-    defaultValue: '',
-    className: '',
-    disabled: false,
-    size: 'default',
-    type: 'text',
-    addonBefore: '',
-    addonAfter: ''
-};
+
 
 export default Input;
