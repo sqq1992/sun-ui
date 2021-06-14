@@ -1,0 +1,61 @@
+
+.sun-alert{
+
+  display: flex;
+  align-items: flex-start;
+  padding: 8px 15px;
+  word-wrap: break-word;
+  color: #000000d9;
+  font-size: 14px;
+
+
+  &.zoom-modal-in-top-enter{
+    .zoom-init-state(0, scaleY(0));
+  }
+
+  &.zoom-modal-in-top-enter-active{
+    .zoom-run-state(1, scaleY(1), center top);
+  }
+
+  &.zoom-modal-in-top-enter-done{
+    .zoom-init-state(1, scaleY(1));
+  }
+
+  &.zoom-modal-in-top-exit-active{
+    .zoom-run-state(0, scaleY(0), center top);
+  }
+
+  .sun-alert-content{
+    flex: 1;
+  }
+  .sun-alert-message{
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+  .sun-alert-close{
+    font-size: 12px;
+    margin-left: 8px;
+    cursor: pointer;
+  }
+
+  &.success{
+    background-color: #f6ffed;
+    border: 1px solid #b7eb8f;
+  }
+
+  &.info{
+    background-color: #e6f7ff;
+    border: 1px solid #91d5ff;
+  }
+
+  &.warning{
+    background-color: #fffbe6;
+    border: 1px solid #ffe58f;
+  }
+
+  &.error{
+    background-color: #fff2f0;
+    border: 1px solid #ffccc7;
+  }
+
+}

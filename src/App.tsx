@@ -3,21 +3,22 @@ import React, {Component, useState} from 'react';
 //todo 测试UI库
 
 //todo 套娃引用sun-ui
-import "sun-ui/dist/index.css";
-import {Button, Menu, Input, AutoComplete, Icon, Modal, Tabs, Select} from "sun-ui";
-const Option = Select.option;
+// import "sun-ui/dist/index.css";
+// import {Button, Menu, Input, AutoComplete, Icon, Modal, Tabs, Select} from "sun-ui";
+// const Option = Select.option;
 
 // 开发的
-// import './style/index.less';
-// import Button from './components/button/Button';
-// import Menu from './components/menu';
-// import Icon from "./components/icon/Icon";
-// import Input from './components/input/Input';
-// import AutoComplete from "./components/autoComplete/AutoComplete";
-// import Tabs from './components/tabs';
-// import Select from "./components/select";
-// import Modal from "./components/modal";
-// const Option = Select.option;
+import './style/index.less';
+import Button from './components/button/Button';
+import Menu from './components/menu';
+import Icon from "./components/icon/Icon";
+import Input from './components/input/Input';
+import AutoComplete from "./components/autoComplete/AutoComplete";
+import Tabs from './components/tabs';
+import Select from "./components/select";
+import Modal from "./components/modal";
+import Alert from './components/alert';
+const Option = Select.option;
 
 
 const TempCom = () => {
@@ -70,9 +71,11 @@ const App: React.FC = () => {
 
     return (
         <div className="App">
-            <div>
-                <Icon type="iconxiangxia"/>
-            </div>
+            <Alert
+                message="我是message"
+                description="我是description"
+                closable={true}
+            />
             <div className="button-box">
                 <Button type="default" autoFocus={true} onClick={handleOpenModal}>openModal</Button>
                 <Button type="primary">primary</Button>
