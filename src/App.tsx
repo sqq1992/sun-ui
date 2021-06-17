@@ -18,6 +18,7 @@ import Tabs from './components/tabs';
 import Select from "./components/select";
 import Modal from "./components/modal";
 import Alert from './components/alert';
+import Progress from './components/progress';
 const Option = Select.option;
 
 
@@ -71,6 +72,7 @@ const App: React.FC = () => {
 
     return (
         <div className="App">
+            <Progress percent={34} />
             <Alert
                 message="我是message"
                 description="我是description"

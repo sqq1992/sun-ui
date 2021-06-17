@@ -525,6 +525,8 @@ module.exports = function(webpackEnv) {
             : undefined
         )
       ),
+
+      //是否内联文件, 这个文件用于模块的缓存
       // Inlines the webpack runtime script. This script is too small to warrant
       // a network request.
       // https://github.com/facebook/create-react-app/issues/5358
@@ -536,6 +538,7 @@ module.exports = function(webpackEnv) {
       // <link rel="icon" href="%PUBLIC_URL%/favicon.ico">
       // It will be an empty string unless you specify "homepage"
       // in `package.json`, in which case it will be the pathname of that URL.
+      //解析html里的东西
       new InterpolateHtmlPlugin(HtmlWebpackPlugin, env.raw),
       // This gives some necessary context to module not found errors, such as
       // the requesting resource.

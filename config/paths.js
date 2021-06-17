@@ -6,7 +6,9 @@ const getPublicUrlOrPath = require('react-dev-utils/getPublicUrlOrPath');
 
 // Make sure any symlinks in the project folder are resolved:
 // https://github.com/facebook/create-react-app/issues/637
+//项目根目录
 const appDirectory = fs.realpathSync(process.cwd());
+//生成绝对路径的方法
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
 
 // We use `PUBLIC_URL` environment variable or "homepage" field to infer
