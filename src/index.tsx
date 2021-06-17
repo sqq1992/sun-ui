@@ -9,3 +9,4 @@ export { default as Tabs} from './components/tabs';
 export { default as Select} from './components/select';
 export { default as Alert} from './components/alert';
 export { default as Progress} from './components/progress';
+export { default as Checkbox} from './components/checkbox';

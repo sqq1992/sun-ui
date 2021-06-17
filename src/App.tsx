@@ -19,6 +19,7 @@ import Select from "./components/select";
 import Modal from "./components/modal";
 import Alert from './components/alert';
 import Progress from './components/progress';
+import Checkbox from './components/checkbox/Checkbox';
 const Option = Select.option;
 
 
@@ -44,7 +45,7 @@ const TempCom = () => {
 
 const App: React.FC = () => {
 
-    const [inputValue,setInputValue] = useState();
+    const [isChecked,setIsChecked] = useState(false);
 
     const [dataSource, setDataSource] = useState([] as any[]);
 
@@ -70,8 +71,15 @@ const App: React.FC = () => {
         setModalVisible(false);
     };
 
+    let handleChangeCheck = (e,checked) => {
+        // setIsChecked(checked)
+    };
+
     return (
         <div className="App">
+            <div>
+                <Checkbox checked={isChecked} onChange={handleChangeCheck} />
+            </div>
             <Progress percent={34} />
             <Alert
                 message="我是message"

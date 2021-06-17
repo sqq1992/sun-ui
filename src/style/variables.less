@@ -1,3 +1,4 @@
+@gray-base :          #000;
 @white:    #fff ;
 @gray-100: #f8f9fa ;
 @gray-200: #e9ecef ;
@@ -9,6 +10,7 @@
 @gray-800: #343a40 ;
 @gray-900: #212529 ;
 @black:    #000 ;
+@gray-lighter :        lighten(@gray-base, 93.5%); // #eee
 
 @blue:    #0d6efd ;
 @indigo:  #6610f2 ;
@@ -163,6 +165,14 @@
 @border-radius-lg:            .3rem ;
 @border-radius-sm:            .2rem ;
 
+// 鼠标禁止样式
+@cursor-disabled :               not-allowed;
+
+// 动画属性
+@transition-time :               .2s;
+
+@transition-timing-functio :     ease-in;
+
 // 不同类型的 box shadow
 @box-shadow-sm:               0 .125rem .25rem rgba(@black, .075) ;
 @box-shadow:                  0 .5rem 1rem rgba(@black, .15) ;
@@ -295,3 +305,17 @@
 @progress-border-radius:            100px ;
 @progress-bar-color:                @white ;
 @progress-bar-transition:           width .6s ease ;
+
+//== Checkboxs ====
+
+@checkbox-size:                    @font-size-base;
+@checkbox-bg-base:                 @primary;
+@checkbox-border-gray-light:       #c9c9c9;
+@checkbox-transform-rotate:        33deg;
+@checkbox-border-radius:           3px;
+@checkbox-after-radius:            2px;
+@checkbox-label-padding-left:      3px;
+@checkbox-label-padding-right:     8px;
+@checkbox-indeterminate-size:      8px;
+@checkbox-default-bg-color:        #fff;
+@checkbox-disabled-color:          rgba(0, 0, 0, .3);

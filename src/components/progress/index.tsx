@@ -29,7 +29,6 @@ const Progress: FC<alertProps> = ({
         [type]: true
     });
 
-
     return (
         <div className={boxClsName}>
             <div className="progress-bar-outer">
